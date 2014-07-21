@@ -51,14 +51,14 @@ var commands = exports.commands = {
 		var amount = readMoney('money', user.userid);
 		target = target.split(',');
 		if (!target[0] || !target[1]) return this.sendReply('/gamble [amount],[roll] - Rolls a 12-sided dice. If your roll matches the dice\'s roll, your betted amount doubles, else, you lose that amount.');
-		
+
 		if ((Math.floor(Math.random()*100)+1) == 1) {
 			var jackpotwin = jackpot;
 			jackpot = 0;
 		 	writeMoney('money', user.userid, jackpotwin);
 		 	return this.sendReplyBox('You won the jackpot. Congratulations, you win '+jackpotwin+' bucks!');
 		}
-		
+
 		jackpot += amount/6;
 		amount -= amount/6;
 
@@ -77,7 +77,7 @@ var commands = exports.commands = {
 			return this.sendReplyBox('You gambled on '+target[1]+' and the dice rolled '+dice+'. You lost, sorry.');
 		}
 	},
-	
+
 	wallet: 'money',
 	atm: 'money',
 	money: function(target, room, user, connection, cmd) {
@@ -266,9 +266,8 @@ var commands = exports.commands = {
 	customsymbol: function (target, room, user) {
 		if (!user.canCustomSymbol) return this.sendReply('You need to buy this item from the shop to use it.');
 		if (!target || target.length > 1) return this.sendReply('/customsymbol [symbol] - changes your symbol (usergroup) to the specified symbol. The symbol can only be one character');
-		//if (toId(target) === target || Config.groups.byRank[target]) {
-		if (target.match(/[A-z0-9 +%@&~#!‽|]/)) return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
-	
+		if (toId(target) === target || Config.groups.bySymbol[target] || target === '|') return this.sendReply('Sorry, but you cannot change your symbol to this for safety/stability reasons.');
+
 		user.getIdentity = function () {
 			var name = Object.getPrototypeOf(this).getIdentity.call(this);
 			if (name[0] === this.group) return target + name.slice(1);
