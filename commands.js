@@ -46,11 +46,17 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Money and Shop
 	 *********************************************************/
+	 
+	jackpot: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		return this.sendReplyBox('The current jackpot is '+jackpot+' bucks.');
+	},
+	
 	gamble: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		var amount = readMoney('money', user.userid);
 		target = target.split(',');
-		if (!target[0] || !target[1]) return this.sendReply('/gamble [amount],[roll] - Rolls a 12-sided dice. If your roll matches the dice\'s roll, your betted amount doubles, else, you lose that amount.');
+		if (!target[0] || !target[1]) return this.sendReply('/gamble [amount],[roll] - Rolls a 12-sided dice. If your roll matches the dice\'s roll, your bet amount multiplies by 11, else, you lose that amount.');
 
 		if ((Math.floor(Math.random()*100)+1) == 1) {
 			var jackpotwin = jackpot;
@@ -78,6 +84,9 @@ var commands = exports.commands = {
 		}
 	},
 
+	purse: 'money',
+	piggybank: 'money',
+	backpocket: 'money',
 	wallet: 'money',
 	atm: 'money',
 	money: function(target, room, user, connection, cmd) {
