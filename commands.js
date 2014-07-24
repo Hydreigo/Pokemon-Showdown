@@ -69,6 +69,7 @@ var commands = exports.commands = {
 		amount -= amount/6;
 
 		var dice = Math.floor(Math.random()*12)+1;
+		if (target[0] < 0) return this.sendReply('No negative numbers.');
 		if (target[0] % 1 != 0 || target[1] % 1 != 0) return this.sendReply('No decimals.');
 		if (target[0] > amount) return this.sendReply('You can not bet more than you have.');
 		if (target[1] > 12 || target[1] < 1) return this.sendReply('The roll number has to be between 1 and 12');
