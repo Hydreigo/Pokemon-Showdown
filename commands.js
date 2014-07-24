@@ -34,7 +34,7 @@ var player1response = new Array();
 var player2response = new Array();
 
 //gamble
-var jackpot = 0;
+var jackpot = 1000;
 
 if (typeof tells === 'undefined') {
 	tells = {};
@@ -58,18 +58,14 @@ var commands = exports.commands = {
 		target = target.split(',');
 		if (!target[0] || !target[1]) return this.sendReply('/gamble [amount],[roll] - Rolls a 12-sided dice. If your roll matches the dice\'s roll, your bet amount multiplies by 11, else, you lose that amount.');
 
-		if ((Math.floor(Math.random()*100)+1) == 1) {
+		if ((Math.floor(Math.random()*10000)+1) == 1) {
 			var jackpotwin = jackpot;
-			jackpot = 0;
 		 	writeMoney('money', user.userid, jackpotwin);
 		 	return this.sendReply('You won the jackpot. Congratulations, you win '+jackpotwin+' bucks!');
 		}
 
-		jackpot += amount/6;
-		amount -= amount/6;
-
 		var dice = Math.floor(Math.random()*12)+1;
-		if (target[0] < 1) return this.sendReply('You can\'t gamble less than 0.);
+		if (target[0] < 1) return this.sendReply('You can\'t gamble less than 0.');
 		if (target[0] % 1 != 0 || target[1] % 1 != 0) return this.sendReply('No decimals.');
 		if (target[0] > amount) return this.sendReply('You can\'t bet more than you have.');
 		if (target[1] > 12 || target[1] < 1) return this.sendReply('The roll number has to be between 1 and 12');
