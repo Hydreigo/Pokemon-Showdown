@@ -1659,11 +1659,12 @@ var commands = exports.commands = {
 		if (!targetUser || !targetUser.connected) {
 			return this.sendReply("User " + this.targetUsername + " not found.");
 		}
+		if (room.auth) return false;
 		if (!this.can('kick', targetUser, room)) return false;
 		var msg = "kicked by " + user.name + (target ? " (" + target + ")" : "") + ".";
 		this.addModCommand("" + targetUser.name + " was " + msg);
 		targetUser.popup("You have been " + msg);
-		targetUser.disconnectAll();
+		targetUser.leaveRoom(room);
 	},
 
 	warn: function (target, room, user) {
