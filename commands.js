@@ -1620,18 +1620,6 @@ var commands = exports.commands = {
 				return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '" + target + "'.");
 			}
 		}
-		if (target.toLowerCase() == "nobland" && !user.nobland) {
-			user.nobland = true;
-			return connection.sendTo(target,'|noinit|joinfailed|WARNING: Adult content may be found in this room, join at your own risk.');
-		}
-		if (target.toLowerCase() == "sairasvan" && !user.saira) {
-			user.saira = true;
-			return connection.sendTo(target,'|noinit|joinfailed|WARNING: Adult content may be found in this room, join at your own risk.');
-		}
-		if (target.toLowerCase() == "pidovetrainingcenter" && !user.pidove) {
-			user.pidove = true;
-			return connection.sendTo(target,'|noinit|joinfailed|WARNING: Adult content may be found in this room, join at your own risk.');
-		}
 		if (!user.joinRoom(targetRoom || room, connection)) {
 			return connection.sendTo(target, "|noinit|joinfailed|The room '" + target + "' could not be joined.");
 		}
