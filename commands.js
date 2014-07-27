@@ -58,7 +58,7 @@ var commands = exports.commands = {
 		target = target.split(',');
 		if (!target[0] || !target[1]) return this.sendReply('/gamble [amount],[roll] - Rolls a 12-sided dice. If your roll matches the dice\'s roll, your bet amount multiplies by 11, else, you lose that amount.');
 
-		if ((Math.floor(Math.random()*10000)+1) == 1) {
+		if ((Math.floor(Math.random()*500)+1) == 1) {
 			var jackpotwin = jackpot;
 		 	writeMoney('money', user.userid, jackpotwin);
 		 	return this.sendReply('You won the jackpot. Congratulations, you win '+jackpotwin+' bucks!');
