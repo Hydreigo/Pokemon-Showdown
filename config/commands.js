@@ -1873,7 +1873,7 @@ var commands = exports.commands = {
 		}
 		if (target === 'rekt'){
 			matched = true;
-			this.sendReplyBox('<img src="http://i3.kym-cdn.com/entries/icons/original/000/014/969/1374702421151.jpg" height="264" width="235" />');
+			this.sendReplyBox('<img src="http://i1.kym-cdn.com/photos/images/newsfeed/000/834/369/004.png" height="300" width="200" />');
 		}
 		if (target === 'death stare'){
 			matched = true;
